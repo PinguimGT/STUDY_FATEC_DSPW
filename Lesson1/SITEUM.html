@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwinds CSS</title>
+    
+      <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-800 text-white-800">
+
+    
+    <nav class="bg-indigo-600 text-white p-4 shadow-md sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <span class="font-bold text-xl">Tailwind</span>
+
+            <button onclick="toggleMenu()" class="md:hidden text-2xl focus:outline-none">☰</button>
+            <div class="hidden md:flex space-x-6">
+                <a href="#" class="hover:text-indigo-200">Início</a>
+                <button onclick="abrirModal()" class="bg-indigo-500 px-3 py-1 rounded hover:bg-indigo-400 transition cursor-pointer">Abrir Modal</button>
+            </div>
+        </div>
+        <!-- Menu   -->
+        <div id="menu_all" class="mt-4 flex flex-col space-y-2 bg-indigo-700 p-4 rounded">
+            <a href="#" class="hover:text-black-500">1. Menu</a>
+            <button onclick="abrirModal(); toggleMenu()" class="text-left bg-indigo-500 px-3 py-1 rounded">Abrir Modal</button>
+        </div>
+    </nav>
+
+    <main class="max-w-4xl mx-auto p-4 md:p-8 space-y-12">
+
+        <!-- 2. CARROSSEL / GALERIA DE IMAGENS -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-black-600">2. Carrossel / Galeria</h2>
+            <div class="relative h-48 bg-black-500 rounded-lg flex items-center justify-center text-white text-2xl font-bold overflow-hidden shadow-inner">
+                <!-- Slides gerenciados por ID -->
+                <div id="slide1" class="block"><img src="https://images.pexels.com/photos/7135053/pexels-photo-7135053.jpeg"></div>
+                <div id="slide2" class="hidden"><img src="https://images.pexels.com/photos/7135034/pexels-photo-7135034.jpeg?auto=compress&w=1260&h=750&dpr=1"></div>
+                
+                <button onclick="mudarSlide()" class="absolute left-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-35 p-2 rounded-full cursor-pointer">❮</button>
+                <button onclick="mudarSlide()" class="absolute right-2 top-1/2 -translate-y-1/2 bg-black bg-opacity-35 p-2 rounded-full cursor-pointer">❯</button>
+            </div>
+        </section>
+
+        <!-- 3. FORMULÁRIO -->
+			 <section id="formulario" class="bg-white p-6 rounded-lg shadow-md text-gray-800 scroll-mt-20">
+            <h2 class="text-xl font-bold mb-2 text-indigo-600">3. Formulário de Cadastro</h2>
+            <p class="text-gray-500 text-sm mb-6">Insira os dados cadastrais do estudante do Grupo 19.</p>
+            
+            <form class="space-y-4" onsubmit="event.preventDefault(); alert('Dados enviados via JS Nativo!')">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-700">Nome do Integrante:</label>
+                        <input type="text" required placeholder="Digite o nome completo" class="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-gray-50 text-gray-800 transition">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold mb-1 text-gray-700">E-mail Acadêmico:</label>
+                        <input type="email" required placeholder="Ex: nome@escola.com" class="w-full p-2.5 border border-gray-300 rounded focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none bg-gray-50 text-gray-800 transition">
+                    </div>
+                </div>
+                <button type="submit" class="bg-indigo-600 text-white px-6 py-2.5 rounded hover:bg-indigo-700 transition cursor-pointer font-medium shadow-md">Enviar Dados</button>
+            </form>
+        </section>
+
+        <!-- 4. TABELA -->
+        <section class="bg-white p-6 rounded-lg shadow-md">
+            <h2 class="text-xl font-bold mb-4 text-indigo-600">4. Tabela de Alunos Responsiva</h2>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-300 text-gray-700">
+                            <th class="p-3 border-b">ID</th>
+                            <th class="p-3 border-b">Nome do Estudante</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="hover:bg-gray-50">
+                            <td class="p-3 border-b">001</td>
+                            <td class="p-3 border-b">Ricardo Otávio</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 5. MODAL-->
+    <div id="Modal" class="hidden fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-lg p-6 max-w-sm w-full shadow-xl">
+            <h3 class="text-lg font-bold mb-2 text-black-700">5. Componente Modal</h3>
+            <p class="text-gray-400 mb-4">Janela ativada usando JS e o framework Tailwind</p>
+            <button onclick="fecharModal()" class="w-full py-2 bg-gray-800 text-white rounded hover:bg-gray-700 transition cursor-pointer">Fechar Janela</button>
+        </div>
+    </div>
+
+    
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('menu_all');
+            menu.classList.toggle('hidden');
+        }
+
+        function abrirModal() {
+            document.getElementById('Modal').classList.remove('hidden');
+        }
+
+        function fecharModal() {
+            document.getElementById('Modal').classList.add('hidden');
+        }
+
+        function mudarSlide() {
+            const s1 = document.getElementById('slide1');
+            const s2 = document.getElementById('slide2');
+            if (s1.classList.contains('block')) {
+                s1.classList.replace('block', 'hidden');
+                s2.classList.replace('hidden', 'block');
+            } else {
+                s2.classList.replace('block', 'hidden');
+                s1.classList.replace('hidden', 'block');
+            }
+        }
+    </script>
+</body>
+</html>
